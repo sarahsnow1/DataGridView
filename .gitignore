@@ -1,2 +1,25 @@
+<<<<<<< HEAD
 .idea/*
 .gradle/*
+=======
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath
+.project
+>>>>>>> 006b008e1fe30dd9ff0a79301de6e3412ca68619
