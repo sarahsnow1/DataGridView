@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <com.sample.datagridview.lib.SyncListView
+    <com.sample.datagridview.core.SyncListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,17 +1,17 @@
 package com.sample.datagridview;
 
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.sample.datagridview.lib.DataGridView;
+import com.sample.datagridview.core.DataGridView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
     DataGridView gridView;
 
@@ -20,17 +20,16 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gridView = new DataGridView(getBaseContext()) {
-
-            String[][] data = {
-                    {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                    {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                    {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                    {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                    {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                    {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                    {"one", "two", "three", "four", "five", "six", "seven", "eight"}
-            };
+                final String[][] data = {
+                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"one", "two", "three", "four", "five", "six", "seven", "eight"}
+        };
+        DataGridView fragment = new DataGridView() {
 
             @Override
             public int numberOfColumns() {
@@ -51,15 +50,21 @@ public class MainActivity extends Activity {
                 }
 
                 TextView textView = (TextView) convertView;
-                textView.setText(data[row][column]);
+                textView.setText(data[column][row]);
 
                 return convertView;
             }
+
+            @Override
+            public FragmentManager fragmentManager() {
+                return MainActivity.this.getSupportFragmentManager();
+            }
         };
 
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        addContentView(gridView, lp);
-
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment, fragment, null);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        transaction.commit();
     }
 
 
