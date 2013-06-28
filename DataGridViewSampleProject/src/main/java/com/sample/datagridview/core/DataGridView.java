@@ -20,6 +20,8 @@ import com.sample.datagridview.R;
  */
 public abstract class DataGridView extends Fragment {
 
+    public abstract int numberOfListItems();
+    public abstract View viewForListRow(int row, View convertView, View parent);
     public abstract int numberOfColumns();
     public abstract int numberOfRowsForColumn(int column);
     public abstract View viewForColumnRow(int column, int row, View convertView, View parent);
@@ -34,6 +36,7 @@ public abstract class DataGridView extends Fragment {
         pager = (ViewPager) v.findViewById(R.id.viewPager);
         listView = (SyncListView) v.findViewById(R.id.listView);
         setupPager();
+        setupListView();
         return v;
     }
 
@@ -84,5 +87,28 @@ public abstract class DataGridView extends Fragment {
         });
     }
 
+    private void setupListView() {
+        listView.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return numberOfListItems();
+            }
+
+            @Override
+            public Object getItem(int i) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int i) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int row, View convertView, ViewGroup parent) {
+                return viewForListRow(row, convertView, parent);
+            }
+        });
+    }
 }
 

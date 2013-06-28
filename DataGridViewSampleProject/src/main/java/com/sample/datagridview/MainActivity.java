@@ -21,15 +21,34 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
                 final String[][] data = {
-                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"one", "two", "three", "four", "five", "six", "seven", "eight"}
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"}
         };
         DataGridView fragment = new DataGridView() {
+
+            @Override
+            public int numberOfListItems() {
+                return data[0].length;
+            }
+
+            @Override
+            public View viewForListRow(int row, View convertView, View parent) {
+                if (convertView == null) {
+                    convertView = new TextView(getBaseContext());
+                    convertView.setLayoutParams(new AbsListView.LayoutParams(100, 100));
+                    convertView.setMinimumWidth(100);
+                }
+
+                TextView textView = (TextView) convertView;
+                textView.setText(String.valueOf(row));
+
+                return convertView;
+            }
 
             @Override
             public int numberOfColumns() {
