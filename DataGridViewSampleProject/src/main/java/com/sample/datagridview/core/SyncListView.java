@@ -64,20 +64,20 @@ public class SyncListView extends ListView {
 
     @Subscribe
     public void handleScrollEvent(SyncListScrollEvent event) {
-        if (event.listView == null) {
-            return;
-        }
-        if (event.listView != this) {
-            View child = event.listView.getChildAt(event.i);
-            if (child == null) {
-                return;
-            }
-            int top = child.getTop();
-            if (event.listView != this) {
-                scrollTo(0, -top);
-
-            }
-        }
+//        if (event.listView == null) {
+//            return;
+//        }
+//        if (event.listView != this) {
+//            View child = event.listView.getChildAt(event.i);
+//            if (child == null) {
+//                return;
+//            }
+//            int top = child.getTop();
+//            if (event.listView != this) {
+//                scrollTo(0, top);
+//
+//            }
+//        }
     }
 
     @Subscribe
@@ -85,6 +85,7 @@ public class SyncListView extends ListView {
         if (event.listView == null) {
             return;
         }
+
         View child = event.listView.getChildAt(0);
         if (child == null) {
             return;

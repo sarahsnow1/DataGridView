@@ -21,13 +21,13 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
                 final String[][] data = {
-                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
-                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight"}
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight"},
+                {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight"}
         };
         DataGridView fragment = new DataGridView() {
 
