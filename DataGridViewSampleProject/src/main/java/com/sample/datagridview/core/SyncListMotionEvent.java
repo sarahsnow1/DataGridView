@@ -9,12 +9,13 @@ import android.widget.ListView;
 public class SyncListMotionEvent {
 
     public ListView listView;
-
+    public boolean intercept;
     public MotionEvent touchEvent;
 
-    public SyncListMotionEvent(ListView listView, MotionEvent ev) {
+    public SyncListMotionEvent(ListView listView, MotionEvent ev,boolean intercept) {
         super();
         this.listView = listView;
         this.touchEvent = ev;
+        this.intercept = intercept;
     }
 }

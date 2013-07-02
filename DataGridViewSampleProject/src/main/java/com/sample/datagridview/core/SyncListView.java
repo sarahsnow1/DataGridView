@@ -17,11 +17,6 @@ import com.squareup.otto.Subscribe;
  */
 public class SyncListView extends ListView {
 
-    MotionEvent touchEvent;
-    int i;
-    int i2;
-    int i3;
-
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     private void commonSetup() {
         if (!isInEditMode()) {
@@ -30,21 +25,6 @@ public class SyncListView extends ListView {
         }
 
         this.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
-
-        setOnScrollListener(new OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-                Log.d("d", "d");
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i2, int i3) {
-                SyncListView.this.i = i;
-                SyncListView.this.i2 = i2;
-                SyncListView.this.i3 = i3;
-                SyncListBus.shared().post(new SyncListScrollEvent(SyncListView.this, i, i2, i3));
-            }
-        });
     }
 
     public SyncListView(Context context) {
@@ -63,59 +43,38 @@ public class SyncListView extends ListView {
     }
 
     @Subscribe
-    public void handleScrollEvent(SyncListScrollEvent event) {
-//        if (event.listView == null) {
-//            return;
-//        }
-//        if (event.listView != this) {
-//            View child = event.listView.getChildAt(event.i);
-//            if (child == null) {
-//                return;
-//            }
-//            int top = child.getTop();
-//            if (event.listView != this) {
-//                scrollTo(0, top);
-//
-//            }
-//        }
-    }
-
-    @Subscribe
     public void handleMotionEvent(SyncListMotionEvent event) {
-        if (event.listView == null) {
-            return;
-        }
+        if(event.touchEvent!=null){
+            if(event.intercept){
+                onInterceptTouchEvent(event.touchEvent,true);
+            }else{
+                onTouchEvent(event.touchEvent,true);
+            }
 
-        View child = event.listView.getChildAt(0);
-        if (child == null) {
-            return;
-        }
-        int top = child.getTop();
-        if (event.listView != this) {
-            scrollTo(0, -top);
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         boolean ret = super.onTouchEvent(ev);
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
-            case MotionEvent.ACTION_UP:
-                this.touchEvent = ev;
-                SyncListBus.shared().post(new SyncListMotionEvent(this, touchEvent));
-                break;
-            case MotionEvent.ACTION_SCROLL:
-                Log.d("d", "d");
-                break;
-            default:
-                Log.d("d", "d");
-                break;
-        }
-
+        SyncListBus.shared().post(new SyncListMotionEvent(this, ev,false));
         return ret;
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        boolean ret = super.onInterceptTouchEvent(ev);
+        SyncListBus.shared().post(new SyncListMotionEvent(this, ev,true));
+        return ret;
+    }
 
+    public boolean onTouchEvent(MotionEvent ev,boolean superHandle) {
+        boolean ret = super.onTouchEvent(ev);
+        return ret;
+    }
+
+    public boolean onInterceptTouchEvent(MotionEvent ev,boolean superHandle) {
+        boolean ret = super.onInterceptTouchEvent(ev);
+        return ret;
+    }
 }
